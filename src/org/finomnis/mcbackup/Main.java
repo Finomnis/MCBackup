@@ -1,7 +1,6 @@
 package org.finomnis.mcbackup;
 
 import java.io.File;
-import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,10 +55,11 @@ public class Main {
 		// parse command line
 		String[] inputArguments = parseCmdLineArgs(args);
 		String inputFolderStr = inputArguments[0];
+		File inputFolder = new File(inputFolderStr);
 		String backupFolderStr = inputArguments[1];
 		File backupFolder = new File(backupFolderStr);
-		Logger.msg("Input folder: " + inputFolderStr);
-		Logger.msg("Backup folder: " + backupFolder.toString());
+		Logger.msg("Input folder: " + inputFolder.getAbsolutePath());
+		Logger.msg("Backup folder: " + backupFolder.getAbsolutePath());
 		
 		// ensure that backup folder exists, otherwise try to create it
 		backupFolder.mkdirs();
@@ -73,7 +73,7 @@ public class Main {
 		Logger.msg("Current timestamp: " + timeStamp.getStamp());
 		
 		// create current backup
-		FolderZipper.zip(inputFolderStr, backupFolder.getAbsolutePath() + File.separator + "backup." + timeStamp + ".zip");
+		FolderZipper.zip(inputFolder, new File(backupFolder, "backup." + timeStamp + ".zip"));
 		
 		// delete unneeded backups
 		BackupManager.cleanup(backupFolder);

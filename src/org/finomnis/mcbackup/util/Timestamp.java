@@ -87,5 +87,18 @@ public class Timestamp implements Comparable<Timestamp>{
 	public int compareTo(Timestamp other) {
 		return this.cal.compareTo(other.cal);
 	}
+
+	public long getTimeDiff(Timestamp other) {
+		return (long) Math.round((this.cal.getTimeInMillis() - other.cal.getTimeInMillis()) / 1000.0);
+	}
+	
+	@Override
+	public boolean equals(Object other){
+		if(! (other instanceof Timestamp))
+			return false;
+		Timestamp otherts = (Timestamp) other;
+		
+		return otherts.getStamp().equals(this.getStamp());		
+	}
 		
 }

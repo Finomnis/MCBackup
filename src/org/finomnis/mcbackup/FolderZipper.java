@@ -24,13 +24,13 @@ public class FolderZipper {
 	 * @param outputFile
 	 *            The output zip file
 	 */
-	public static void zip(String inputFolder, String outputFile) {
+	public static void zip(File inputFolder, File outputFile) {
 
 		// Generate a list of all the files that we want to zip
 		List<String> fileList = generateFileList(inputFolder);
 
 		// Get the parent dir
-		String parentDir = new File(inputFolder).getAbsoluteFile().getParent();
+		String parentDir = inputFolder.getAbsoluteFile().getParent();
 
 		// a buffer to speed up file io
 		byte[] buffer = new byte[1024];
@@ -96,16 +96,16 @@ public class FolderZipper {
 	 * Generate a list of all the files that are in a given directory or
 	 * subdirectory
 	 * 
-	 * @param basedir
+	 * @param inputFolder
 	 *            The base directory.
 	 * @return A list of all files inside the base directory or one of its
 	 *         subdirectories. This list contains the full path information of
 	 *         every file, starting with the name of the base directory.
 	 */
-	private static List<String> generateFileList(String basedir) {
+	private static List<String> generateFileList(File inputFolder) {
 
 		// get full basedir path
-		File baseDir = new File(basedir).getAbsoluteFile();
+		File baseDir = inputFolder.getAbsoluteFile();
 
 		// ensure that the basedir exists
 		if (!(baseDir.exists() && baseDir.isDirectory())) {
