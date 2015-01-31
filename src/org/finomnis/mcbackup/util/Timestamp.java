@@ -21,7 +21,11 @@ public class Timestamp implements Comparable<Timestamp>{
 				+ "-" + String.format("%02d", cal.get(Calendar.SECOND));
 	}
 	
-	
+	public Timestamp add(long seconds){
+		Calendar newCal = Calendar.getInstance();
+		newCal.setTimeInMillis(cal.getTimeInMillis() + seconds * 1000);
+		return new Timestamp(newCal);
+	}
 	
 	public static Timestamp now(){
 		return new Timestamp(Calendar.getInstance());

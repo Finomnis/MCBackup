@@ -85,7 +85,6 @@ public class BackupManager {
 		
 		Timestamp newest = toKeep.get(toKeep.size() - 1); 
 		for(int i = 1; i < toKeep.size() - 1; i++){
-			// TODO this is bullshit. make it better.
 			Timestamp older = toKeep.get(i - 1);
 			Timestamp curr = toKeep.get(i);
 			
